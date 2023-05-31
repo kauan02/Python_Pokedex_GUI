@@ -15,10 +15,8 @@ meu_tema = {'BACKGROUND': '#fc0349',
             'SLIDER_DEPTH': 0,
             'PROGRESS_DEPTH': 0}
 
-# Configure o tema personalizado
 sg.theme_add_new('MeuTema', meu_tema)
 
-# Aplique o tema personalizado
 sg.theme('MeuTema')
 
 
