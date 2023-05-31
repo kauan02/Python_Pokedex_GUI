@@ -1,5 +1,5 @@
 # @Author: Kauan Rezende
-# @Date: 2023-05-30 23:11:17
+# @Date:   2023-05-30 23:11:17
 
 import requests
 import PySimpleGUI as sg
