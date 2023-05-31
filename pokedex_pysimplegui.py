@@ -75,7 +75,10 @@ def exibir_informacoes(nome_pokemon, imagem_path, habilidades, estatisticas):
                   text_color='#89e3f0',
                   pad=((32, 25), (5, 5), ))],
         
-        [sg.Button("Back", key='-BACK-', font='Helvetica 12')]
+        [sg.Button("Back",
+                   key='-BACK-',
+                   font='Helvetica 12',
+                   pad=((110, 100), (5, 5)))]
     ]
 
     window = sg.Window("Pokémon Information", layout)
