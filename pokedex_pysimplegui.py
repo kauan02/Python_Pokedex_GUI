@@ -75,7 +75,9 @@ def exibir_informacoes(nome_pokemon, imagem_path, habilidades, estatisticas):
                   justification='left',
                   background_color='#313131',
                   text_color='#89e3f0',
-                  pad=((32, 25), (5, 5), ))]
+                  pad=((32, 25), (5, 5), ))],
+        
+        [sg.Button("Back", key='-BACK-', font='Helvetica 12')]
     ]
 
     window = sg.Window("Pokémon Information", layout)
@@ -85,22 +87,29 @@ def exibir_informacoes(nome_pokemon, imagem_path, habilidades, estatisticas):
 
         if event == sg.WINDOW_CLOSED:
             break
+        elif event == '-BACK-':
+            window.close()
+            return
 
     window.close()
 
 
-nome_pokemon = sg.popup_get_text(
-    "Enter the name or number of the Pokémon:", font='Helvetica 12 bold')
+while True:
+    nome_pokemon = sg.popup_get_text(
+        "Enter the name or number of the Pokémon:", font='Helvetica 12 bold')
 
-informacoes = obter_informacoes_pokemon(nome_pokemon)
+    if not nome_pokemon:
+        break
 
-if informacoes:
-    nome, imagem_url, habilidades, estatisticas = informacoes
-    imagem_temp_file = tempfile.NamedTemporaryFile(delete=False)
-    imagem_response = requests.get(imagem_url)
-    imagem_temp_file.write(imagem_response.content)
-    imagem_temp_file.close()
-    exibir_informacoes(nome, imagem_temp_file.name, habilidades, estatisticas)
-    os.unlink(imagem_temp_file.name)
-else:
-    sg.popup("Pokémon not found.")
+    informacoes = obter_informacoes_pokemon(nome_pokemon)
+
+    if informacoes:
+        nome, imagem_url, habilidades, estatisticas = informacoes
+        imagem_temp_file = tempfile.NamedTemporaryFile(delete=False)
+        imagem_response = requests.get(imagem_url)
+        imagem_temp_file.write(imagem_response.content)
+        imagem_temp_file.close()
+        exibir_informacoes(nome, imagem_temp_file.name, habilidades, estatisticas)
+        os.unlink(imagem_temp_file.name)
+    else:
+        sg.popup("Pokémon not found.")
