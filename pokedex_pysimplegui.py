@@ -4,12 +4,12 @@ import tempfile
 import os
 from PIL import Image, ImageTk
 
-meu_tema = {'BACKGROUND': '#383838',
-            'TEXT': '#def5fc',
+meu_tema = {'BACKGROUND': '#fc0349',
+            'TEXT': '#313131',
             'INPUT': '#89e3f0',
-            'TEXT_INPUT': '#000000',
+            'TEXT_INPUT': '#313131',
             'SCROLL': '#0f0f0f',
-            'BUTTON': ('#ffffff', '#474747'),
+            'BUTTON': ('#ffffff', '#242424'),
             'PROGRESS': ('#000000', '#FFFFFF'),
             'BORDER': 1,
             'SLIDER_DEPTH': 0,
@@ -43,13 +43,39 @@ def obter_informacoes_pokemon(nome):
 
 def exibir_informacoes(nome_pokemon, imagem_path, habilidades, estatisticas):
     layout = [
-        [sg.Text(f"Name: {nome_pokemon}", font='Helvetica 12 bold')],
-        [sg.Image(filename=imagem_path, size=(230, 100))],
-        [sg.Text("Skills:", font='Helvetica 12 bold')],
-        [sg.Listbox(habilidades, size=(30, len(habilidades)),
-                    key='-HABILIDADES-', enable_events=True)],
-        [sg.Text("Statistics:", font='Helvetica 12 bold')],
-        [sg.Table(values=estatisticas, headings=['Estatística', 'Valor'], auto_size_columns=True, justification='left')]
+        [sg.Text(f"Name: {nome_pokemon}",
+                 font='Helvetica 12 bold',
+                 pad=((28, 20), (0, 0)))],
+        
+        [sg.Image(filename=imagem_path,
+                  size=(206, 140),
+                  background_color="#89e3f0",
+                  pad=((30, 20), (0, 20)))],
+        
+        [sg.Text("Skills:",
+                 font='Helvetica 12 bold',
+                 pad=((28, 20), (0, 0)))],
+        
+        [sg.Listbox(habilidades,
+                    size=(27, len(habilidades)),
+                    key='-HABILIDADES-',
+                    enable_events=True,
+                    background_color='#313131',
+                    text_color='#89e3f0',
+                    pad=((32, 25), (5, 5)))],
+        
+        [sg.Text("Statistics:",
+                 font='Helvetica 12 bold',
+                 pad=((28, 20), (0, 0)))],
+        
+        [sg.Table(values=estatisticas,
+                  headings=['Statistics', 'Valor'],
+                  auto_size_columns=True,
+                  size=(27, len(estatisticas)),
+                  justification='left',
+                  background_color='#313131',
+                  text_color='#89e3f0',
+                  pad=((32, 25), (5, 5), ))]
     ]
 
     window = sg.Window("Pokémon Information", layout)
@@ -63,7 +89,8 @@ def exibir_informacoes(nome_pokemon, imagem_path, habilidades, estatisticas):
     window.close()
 
 
-nome_pokemon = sg.popup_get_text("Enter the name or number of the Pokémon:")
+nome_pokemon = sg.popup_get_text(
+    "Enter the name or number of the Pokémon:", font='Helvetica 12 bold')
 
 informacoes = obter_informacoes_pokemon(nome_pokemon)
 
