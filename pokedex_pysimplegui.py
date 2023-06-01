@@ -1,11 +1,12 @@
 # @Author: Kauan Rezende
 # @Date:   2023-05-30 23:11:17
 
+import datetime
 import requests
 import PySimpleGUI as sg
 import tempfile
 import os
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk #use "pip install pillow"
 
 meu_tema = {'BACKGROUND': '#fc0349',
             'TEXT': '#313131',
@@ -49,6 +50,7 @@ def exibir_informacoes(nome_pokemon, imagem_path, habilidades, estatisticas):
                  pad=((28, 20), (0, 0)))],
         
         [sg.Image(filename=imagem_path,
+                  
                   size=(206, 140),
                   background_color="#89e3f0",
                   pad=((30, 20), (0, 20)))],
